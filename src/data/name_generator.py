@@ -1,12 +1,17 @@
 import csv
-import pathlib
 import random
+from typing import Sequence, Optional
 
 
-DIR_PATH = pathlib.Path(__file__).resolve().parent
+def generate_random_name(possible_names: Sequence=[], additional_name: Optional[str] = None) -> str:
+    file = open('player_names.csv', 'r')
+    read_file = csv.DictReader(file)
+    possible_names = [row['name'] for row in read_file]
+    if additional_name:
+        possible_names.append(additional_name)
 
-def generate_random_name() -> str:
-    with open(DIR_PATH / 'player_names.csv', 'r') as csv_file:
-        reader = csv.DictReader(csv_file)
-        names = [row['name'] for row in reader]
-        return random.choice(names)
+    return random.choice(possible_names)
+
+
+if __name__ == '__main__':
+    print(generate_random_name(additional_name='chris'))

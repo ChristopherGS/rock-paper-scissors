@@ -12,7 +12,3 @@ def main():
     result = run_game(player1=player1, player2=player2)
 
     print(result.value)
-
-
-if __name__ == '__main__':
-    main()
